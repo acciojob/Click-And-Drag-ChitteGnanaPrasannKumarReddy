@@ -14,6 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
             offsetY = e.clientY - activeItem.offsetTop;
             activeItem.style.position = "absolute";
             activeItem.style.zIndex = 1000;
+            e.preventDefault(); 
         });
     });
 
@@ -34,6 +35,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
         activeItem.style.left = `${newX}px`;
         activeItem.style.top = `${newY}px`;
+
+    
+        if (newX < containerRect.left + 20) {
+            container.scrollLeft -= 10;
+        } else if (newX + itemRect.width > containerRect.right - 20) {
+            container.scrollLeft += 10;
+        }
     });
 
     document.addEventListener("mouseup", () => {
